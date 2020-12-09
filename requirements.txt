@@ -1,0 +1,3 @@
+PyBluez2==0.41
+rpi-ws281x==4.2.5
+libbluetooth-dev==5.48
