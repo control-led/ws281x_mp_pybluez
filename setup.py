@@ -84,7 +84,7 @@ os.system("sudo apt-get install libbluetooth-dev")
 os.system("echo Now installing the rpi_ws281x and the pybluez2 library!")
 time.sleep(3)
 
-#this code runs after all dependencies were set and work.
+
 def _post_install():
     print("echo Now, the librarys pybluez2 and rpiws281x are installed. Set some important Bluetooth settings now...")
     import re, fileinput, sys
@@ -96,7 +96,7 @@ def _post_install():
             for k_match in k_matches:
                 line = line.replace(k_match.group(), "ExecStart=/usr/lib/bluetooth/bluetoothd --compat")
 
-            sys.stdout.write(line)  #Schreibt jede Zeile neu und falls matches dann ersetzt mit ExecStart=/usr/lib/bluetooth/bluetoothd -C
+            sys.stdout.write(line)  
 
         fileinput.close()
     except FileNotFoundError:
@@ -116,7 +116,7 @@ def _post_install():
                     k_matches = keyword_to_search.finditer(line)
                     for k_match in k_matches:
                         line = line.replace(k_match.group(), "sudo python3 -O /home/pi/ws281x_mp_pybluez/main.py &") #hier file einfügen
-                    sys.stdout.write(line)  #Schreibt jede Zeile neu und falls matches dann ersetzt mit ExecStart=/usr/lib/bluetooth/bluetoothd -C
+                    sys.stdout.write(line)  
                 fileinput.close()
 
             file_object = open(filename, 'a')
@@ -149,7 +149,6 @@ setup(
     license = 'MIT-license',
     url='https://pypi.python.org/pypi/multiprocessing_ledstrip',
     keywords=['ledstrip', 'app', 'raspberrypi'],
-    #dependency_links = ['https://github.com/hiaselhans/pybluez.git', 'https://github.com/rpi-ws281x/rpi-ws281x-python.git#rpi-ws281x-python'],
     install_requires = [
     "rpi-ws281x == 4.1.0",
     "pybluez2 == 0.41"],
